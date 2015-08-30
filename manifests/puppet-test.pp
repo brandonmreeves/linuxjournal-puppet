@@ -8,5 +8,6 @@ node 'puppet-test' {
     }
 
     class { 'developer_pc': developer => 'david' }
+    class { 'puppet_apply': ; }
 }
 
