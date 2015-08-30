@@ -2,12 +2,21 @@ include apt
 
 
 node 'puppet-test' {
+    $developer = 'david'
+
     package { 'vim':
             ensure => 'present'
         }
     package { 'emacs':
             ensure => 'absent'
         }
+
+    user { "$developer":
+        ensure => present,
+        comment => "Developer $developer",
+        shell => '/bin/bash',
+        managehome => true,
+    }    
 }
 
 
