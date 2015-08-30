@@ -28,6 +28,23 @@ class developer_pc ($developer) {
         owner => "$developer",
         group => "$developer",
     }
+
+
+    package { 'openssh-server': 
+        ensure => 'present' 
+    }
+
+    service { 'ssh':
+        ensure => running,
+        require => [ Package["openssh-server"] ]
+    }
+
+    augeas { 'change-sshd':
+        context => '/files/etc/ssh/sshd_config',
+        changes => ['set Port 2022', 'set PasswordAuthentication no'],
+        notify => Service['ssh'],
+        require => [ Package["openssh-server"] ]
+    }
 }
 
 
