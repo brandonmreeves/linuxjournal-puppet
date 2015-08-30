@@ -1,4 +1,4 @@
 # Managed by puppet in developer_pc
 
 set nowrap
-
+set ignorecase
