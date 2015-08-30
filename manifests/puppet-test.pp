@@ -1,23 +1,12 @@
-include apt
-
-
 node 'puppet-test' {
-    $developer = 'david'
-
     package { 'vim':
-            ensure => 'present'
-        }
-    package { 'emacs':
-            ensure => 'absent'
-        }
+        ensure => 'present'
+    }
 
-    user { "$developer":
-        ensure => present,
-        comment => "Developer $developer",
-        shell => '/bin/bash',
-        managehome => true,
-    }    
+    package { 'emacs': 
+        ensure => 'absent'
+    }
+
+    class { 'developer_pc': developer => 'david' }
 }
-
-
 
