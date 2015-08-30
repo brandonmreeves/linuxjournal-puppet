@@ -13,6 +13,21 @@ class developer_pc ($developer) {
         group => "$developer",
         require => [ User["$developer"] ]
     }
+
+    file { "/home/$developer/Projects":
+        ensure => 'directory',
+        owner => "$developer",
+        group => "$developer",
+        require => [ User["$developer"] ]
+    }
+
+    -> 
+
+    file { "/home/$developer/Projects/override.properties":
+        content => template('developer_pc/override.properties.erb'),
+        owner => "$developer",
+        group => "$developer",
+    }
 }
 
 
